@@ -43,18 +43,16 @@ function App() {
         return ids;
       };
       const arrId = await dataById();
-      const data = [];
-      for (let i of arrId) {
-        data.push(await searchPokemonById(i));
-      }
-      setData(data);
+      const dataPromises = arrId.map((id) => searchPokemonById(id));
+      const fetchesData = Promise.all(dataPromises);
+      setData(fetchesData);
     })();
   }, []);
 
   const handleSearchByName = async (e) => {
     e.preventDefault();
-    if (search.trim === "") {
-      isSearching(false);
+    if (search.trim() === "") {
+      isSearching(true);
       return;
     }
     const searching = data.filter((e) => e.name.startsWith(search));
@@ -66,7 +64,7 @@ function App() {
     <>
       <form
         className="flex gap-12 items-center mb-4"
-        onClick={handleSearchByName}
+        onSubmit={handleSearchByName}
       >
         <label className="text-xl" htmlFor="search">
           Search
