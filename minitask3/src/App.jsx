@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import "./globals.css";
 
 function App() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [dataSearching, setDataSearcing] = useState([]);
+  const [isSearching, setIsSeaching] = useState(true);
 
   const APIURL = "https://pokeapi.co/api/v2/";
 
@@ -51,17 +51,23 @@ function App() {
     })();
   }, []);
 
-  let isSearching = true;
-
-  const handleSearchByName = async (search) => {
+  const handleSearchByName = async (e) => {
+    e.preventDefault();
+    if (search.trim === "") {
+      isSearching(false);
+      return;
+    }
     const searching = data.filter((e) => e.name.startsWith(search));
     setDataSearcing(searching);
-    isSearching = false;
+    setIsSeaching(false);
   };
 
   return (
     <>
-      <form className="flex gap-12 items-center mb-4">
+      <form
+        className="flex gap-12 items-center mb-4"
+        onClick={handleSearchByName}
+      >
         <label className="text-xl" htmlFor="search">
           Search
         </label>
@@ -75,12 +81,7 @@ function App() {
             setSearch(e.target.value);
           }}
         />
-        <button
-          onClick={() => {
-            setSearch("");
-            handleSearchByName(search);
-          }}
-        ></button>
+        <button type="submit">Search</button>
       </form>
       <section className="p-6">
         <ol className="grid grid-cols-4 gap-5 ">
@@ -107,7 +108,10 @@ function App() {
               })
             : dataSearching.map((element) => {
                 return (
-                  <li className="list-none" key={element.id}>
+                  <li
+                    className="list-none border-2 border-solid border-amber-500 p-6 flex items-center flex-col rounded-2xl"
+                    key={element.id}
+                  >
                     <h1>{element.name}</h1>
                     <img
                       src={element.sprites.front_default}
