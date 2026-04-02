@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Pokemon() {
   const [data, setData] = useState([]);
@@ -130,6 +131,7 @@ function Pokemon() {
               })}
         </ol>
       </section>
+      <Footer />
     </>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import { Review } from "../components/Review";
 import { FormReview } from "../components/FormReview";
+import Footer from "../components/Footer";
 
 const dataReview = localStorage.getItem("data-review");
 const initialDataReview = JSON.parse(dataReview) || [];
@@ -44,6 +45,7 @@ function HomePage() {
           <Review reviews={reviews} />
         </section>
       </main>
+      <Footer />
     </>
   );
 }

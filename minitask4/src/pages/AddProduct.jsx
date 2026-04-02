@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form } from "../components/Form";
 import { Table } from "../components/Table";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 let nextId = 4;
 const initialProducts = [
@@ -42,6 +43,7 @@ function AddProduct() {
         <Form onAddProduct={handleAddProduct} />
         <Table products={products} />
       </main>
+      <Footer />
     </>
   );
 }

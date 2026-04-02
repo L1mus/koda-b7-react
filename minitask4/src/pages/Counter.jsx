@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Counter() {
   let [count, setCount] = useState(0);
@@ -30,6 +31,7 @@ function Counter() {
         children="Decrement"
         className="bg-amber-300 border-2 border-solid border-black p-3"
       />
+      <Footer />
     </>
   );
 }
