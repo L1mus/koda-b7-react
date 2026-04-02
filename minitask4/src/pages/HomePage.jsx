@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { Review } from "../components/Review";
 import { FormReview } from "../components/FormReview";
@@ -19,8 +19,10 @@ const lastId = findLastId();
 function HomePage() {
   const [reviews, setReviews] = useState(initialDataReview);
   const [id, setId] = useState(lastId);
-
-  localStorage.setItem("data-review", JSON.stringify(reviews));
+  
+  useEffect(() => {
+    localStorage.setItem("data-review", JSON.stringify(reviews));
+  }, [reviews]);
 
   const handleAddReview = (nameReview, messageReview) => {
     setId((id) => id + 1);
